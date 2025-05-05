@@ -1,0 +1,27 @@
+<!-- <?php $this->load->view('header'); ?> -->
+
+<h2>Daftar Destinasi Wisata</h2>
+<a class="btn" href="<?php echo site_url('destination/add'); ?>">Tambah Destinasi</a>
+<table>
+    <tr>
+        <th>Foto</th>
+        <th>Nama</th>
+        <th>Lokasi</th>
+        <th>Deskripsi</th>
+        <th>Aksi</th>
+    </tr>
+    <?php foreach ($destinations as $d): ?>
+    <tr>
+        <td><img src="<?= base_url('assets/uploads/' . $d->photo) ?>" width="100"></td>
+        <td><?= $d->name ?></td>
+        <td><?= $d->location ?></td>
+        <td><?= $d->description ?></td>
+        <td>
+            <a href="<?= site_url('destination/edit/' . $d->id) ?>">Edit</a> |
+            <a href="<?= site_url('destination/delete/' . $d->id) ?>" onclick="return confirm('Hapus destinasi ini?')">Hapus</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+
+<?php $this->load->view('footer'); ?>
