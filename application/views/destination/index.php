@@ -25,6 +25,7 @@
             <td><?= $d['location'] ?></td>
             <td><?= $d['description'] ?></td>
             <td>
+                <a href="<?= site_url('destination/detail/' . $d['id']) ?>" class="btn btn-info">Detail</a>
                 <a href="<?= site_url('destination/editView/' . $d['id']) ?>" class="btn">Edit</a>
                 <a href="<?= site_url('destination/delete/' . $d['id']) ?>" class="btn btn-danger" onclick="return confirm('Hapus destinasi ini?')">Hapus</a>
             </td>

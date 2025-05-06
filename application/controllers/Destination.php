@@ -89,4 +89,14 @@ class Destination extends CI_Controller {
 
         redirect('destination');
     }
+
+    public function detail($id) {
+        $data['destination'] = $this->DestinationModel->getById($id);
+    
+        if (!$data['destination']) {
+            show_404(); // tampilkan 404 kalau data tidak ditemukan
+        }
+    
+        $this->load->view('destination/detail', $data);
+    }    
 }
