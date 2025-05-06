@@ -72,31 +72,44 @@ class Destination extends CI_Controller {
         redirect('destination');
     }
 
-    public function delete($id) {
-        // Ambil data destinasi berdasarkan ID
-        $destination = $this->DestinationModel->getById($id);
+	public function delete($id) {
+		$destination = $this->DestinationModel->getById($id);
 
-        // Hapus file foto jika ada
-        if ($destination && !empty($destination->photo)) {
-            $file_path = FCPATH . 'assets/uploads/' . $destination->photo;
-            if (file_exists($file_path)) {
-                unlink($file_path); // Hapus file
-            }
-        }
+		if ($destination && !empty($destination['photo'])) {
+			$file_path = FCPATH . 'assets/uploads/' . $destination['photo'];
+			if (file_exists($file_path)) {
+				unlink($file_path);
+			}
+		}
 
-        // Hapus data dari database
-        $this->DestinationModel->delete($id);
+		$this->DestinationModel->delete($id);
 
-        redirect('destination');
-    }
+		redirect('destination');
+	}
 
     public function detail($id) {
         $data['destination'] = $this->DestinationModel->getById($id);
-    
+
         if (!$data['destination']) {
             show_404(); // tampilkan 404 kalau data tidak ditemukan
         }
-    
+
         $this->load->view('destination/detail', $data);
-    }    
+    }
+
+	public function deleteAll(){
+		$destinations = $this->DestinationModel->getAll();
+
+		foreach ($destinations as $destination) {
+			$file_path = FCPATH . 'assets/uploads/' . $destination['photo'];
+			if (!empty($destination['photo']) && file_exists($file_path)) {
+				unlink($file_path);
+			}
+		}
+
+		$this->DestinationModel->deleteAll();
+		redirect('destination');
+	}
+
+
 }
