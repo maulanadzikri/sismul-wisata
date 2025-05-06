@@ -28,4 +28,8 @@ class DestinationModel extends CI_Model {
     public function delete($id) {
         return $this->db->delete('destinasi', array('id' => $id));
     }
+
+	public function deleteAll(){
+		return $this->db->empty_table('destinasi');
+	}
 }

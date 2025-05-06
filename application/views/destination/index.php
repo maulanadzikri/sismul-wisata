@@ -7,6 +7,12 @@
     <i class="fas fa-plus-circle"></i> Tambah Destinasi
 </a>
 
+<a onclick="return confirm('Apus semua nih?')"
+ href="<?= site_url('destination/deleteAll'); ?>" class="btn">
+    <i class="fas fa-plus-circle"></i> DeleteAll
+</a>
+
+
 <table class="styled-table">
     <thead>
         <tr>
